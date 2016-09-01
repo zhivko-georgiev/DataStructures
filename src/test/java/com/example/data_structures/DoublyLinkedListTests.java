@@ -2,6 +2,7 @@ package com.example.data_structures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -28,7 +29,7 @@ public class DoublyLinkedListTests {
 		assertEquals(1, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(5));
 	}
 
@@ -46,7 +47,7 @@ public class DoublyLinkedListTests {
 		assertEquals(3, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(3, 5, 10));
 	}
 
@@ -66,7 +67,7 @@ public class DoublyLinkedListTests {
 		assertEquals(1, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(5));
 	}
 
@@ -84,7 +85,7 @@ public class DoublyLinkedListTests {
 		assertEquals(3, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(5, 10, 15));
 	}
 
@@ -106,7 +107,7 @@ public class DoublyLinkedListTests {
 		assertEquals(0, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, new ArrayList<Integer>());
 	}
 
@@ -135,7 +136,7 @@ public class DoublyLinkedListTests {
 		assertEquals(2, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(6, 7));
 	}
 
@@ -157,7 +158,7 @@ public class DoublyLinkedListTests {
 		assertEquals(0, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, new ArrayList<Integer>());
 	}
 
@@ -186,7 +187,7 @@ public class DoublyLinkedListTests {
 		assertEquals(2, list.size());
 
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(8, 9));
 	}
 
@@ -232,7 +233,7 @@ public class DoublyLinkedListTests {
 
 		// Act
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 
 		// Assert
 		CollectionUtils.isEqualCollection(items, new ArrayList<Integer>());
@@ -246,7 +247,7 @@ public class DoublyLinkedListTests {
 
 		// Act
 		List<Integer> items = new ArrayList<Integer>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 
 		// Assert
 		CollectionUtils.isEqualCollection(items, Arrays.asList(5));
@@ -262,9 +263,51 @@ public class DoublyLinkedListTests {
 
 		// Act
 		List<String> items = new ArrayList<>();
-		list.forEach(items::add);
+		list.forEachNode(items::add);
 
 		// Assert
 		CollectionUtils.isEqualCollection(items, Arrays.asList("Five", "Six", "Seven"));
+	}
+
+	/*
+	 * Iterable
+	 */
+
+	@Test
+	public void Iterable_Foreach_MultipleElements() {
+		// Arrange
+		DoublyLinkedList<String> list = new DoublyLinkedList<>();
+		list.аddLast("Five");
+		list.аddLast("Six");
+		list.аddLast("Seven");
+
+		// Act
+		List<String> items = new ArrayList<>();
+		for (String element : list) {
+			items.add(element);
+		}
+
+		// Assert
+		CollectionUtils.isEqualCollection(items, Arrays.asList("Five", "Six", "Seven"));
+	}
+
+	@Test
+	public void Iterable_NonGeneric_MultipleElements() {
+		// Arrange
+		DoublyLinkedList<Object> list = new DoublyLinkedList<>();
+		list.аddLast("Five");
+		list.аddLast(6);
+		list.аddLast(7.77);
+
+		// Act
+		Iterator<Object> iterator = list.iterator();
+		List<Object> items = new ArrayList<>();
+
+		while (iterator.hasNext()) {
+			items.add(iterator.next());
+		}
+
+		// Assert
+		CollectionUtils.isEqualCollection(items, Arrays.asList("Five", 6, 7.77));
 	}
 }

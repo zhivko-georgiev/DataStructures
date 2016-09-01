@@ -1,26 +1,28 @@
 package com.example.data_structures;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
 	private ListNode<T> head;
 	private ListNode<T> tail;
 	private int count;
 
 	private class ListNode<T> {
-		private T value;
+		private final T value;
 		private ListNode<T> nextNode;
 		private ListNode<T> prevNode;
 
-		private ListNode(T value) {
+		private ListNode(final T value) {
 			super();
 			this.value = value;
 		}
 	}
 
-	public void аddFirst(T element) {
+	public void аddFirst(final T element) {
 		if (this.count == 0) {
 			this.head = this.tail = new ListNode<T>(element);
 		} else {
@@ -33,7 +35,7 @@ public class DoublyLinkedList<T> {
 		this.count++;
 	}
 
-	public void аddLast(T element) {
+	public void аddLast(final T element) {
 		if (this.count == 0) {
 			this.head = this.tail = new ListNode<T>(element);
 		} else {
@@ -51,7 +53,7 @@ public class DoublyLinkedList<T> {
 			throw new IllegalStateException("Empty List");
 		}
 
-		T firstElement = this.head.value;
+		final T firstElement = this.head.value;
 		this.head = this.head.nextNode;
 
 		if (this.head != null) {
@@ -70,7 +72,7 @@ public class DoublyLinkedList<T> {
 			throw new IllegalStateException("Empty List");
 		}
 
-		T lastElement = this.tail.value;
+		final T lastElement = this.tail.value;
 		this.tail = this.tail.prevNode;
 
 		if (this.tail != null) {
@@ -88,8 +90,7 @@ public class DoublyLinkedList<T> {
 		return this.count;
 	}
 
-	
-	public void forEach(Consumer<T> consumer) {
+	public void forEachNode(Consumer<T> consumer) {
 		ListNode<T> currentNode = this.head;
 		while (currentNode != null) {
 			consumer.accept(currentNode.value);
@@ -99,7 +100,7 @@ public class DoublyLinkedList<T> {
 	}
 
 	public Object[] toArray() {
-		List<T> list = new ArrayList<>(this.count);
+		final List<T> list = new ArrayList<>(this.count);
 
 		ListNode<T> currentNode = this.head;
 
@@ -109,5 +110,41 @@ public class DoublyLinkedList<T> {
 		}
 
 		return list.toArray();
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		final DoublyLinkedList<T> list = this;
+
+		return new Iterator<T>() {
+			final ListNode<T> firstNode = list.head;
+			ListNode<T> currentNode = null;
+
+			@Override
+			public boolean hasNext() {
+				if (list.count == 0) {
+					return false;
+				} else if (currentNode == null) {
+					return true;
+				} else if (currentNode == list.tail) {
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public T next() {
+				if (list.count == 0) {
+					throw new NoSuchElementException();
+				} else if (currentNode == null) {
+					this.currentNode = firstNode;
+					return currentNode.value;
+				} else if (currentNode.nextNode == null) {
+					throw new NoSuchElementException();
+				}
+				this.currentNode = currentNode.nextNode;
+				return currentNode.value;
+			}
+		};
 	}
 }
