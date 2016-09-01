@@ -18,7 +18,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void AddFirst_EmptyList_ShouldAddElement() {
+	public void addFirst_EmptyList_ShouldAddElement() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
@@ -34,7 +34,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void AddFirst_SeveralElements_ShouldAddElementsCorrectly() {
+	public void addFirst_SeveralElements_ShouldAddElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
@@ -56,7 +56,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void AddLast_EmptyList_ShouldAddElement() {
+	public void addLast_EmptyList_ShouldAddElement() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
@@ -72,7 +72,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void AddLast_SeveralElements_ShouldAddElementsCorrectly() {
+	public void addLast_SeveralElements_ShouldAddElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
@@ -94,7 +94,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void RemoveFirst_OneElement_ShouldMakeListEmpty() {
+	public void removeFirst_OneElement_ShouldMakeListEmpty() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 		list.аddLast(5);
@@ -112,16 +112,17 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void RemoveFirst_EmptyList_ShouldThrowException() {
+	public void removeFirst_EmptyList_ShouldThrowException() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
 		// Act
+		@SuppressWarnings("unused")
 		Integer element = list.removeFirst();
 	}
 
 	@Test
-	public void RemoveFirst_SeveralElements_ShouldRemoveElementsCorrectly() {
+	public void removeFirst_SeveralElements_ShouldRemoveElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 		list.аddLast(5);
@@ -145,7 +146,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void RemoveLast_OneElement_ShouldMakeListEmpty() {
+	public void removeLast_OneElement_ShouldMakeListEmpty() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 		list.аddFirst(5);
@@ -163,16 +164,17 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void RemoveLast_EmptyList_ShouldThrowException() {
+	public void removeLast_EmptyList_ShouldThrowException() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
 		// Act
+		@SuppressWarnings("unused")
 		Integer element = list.removeLast();
 	}
 
 	@Test
-	public void RemoveLast_SeveralElements_ShouldRemoveElementsCorrectly() {
+	public void removeLast_SeveralElements_ShouldRemoveElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 		list.аddFirst(10);
@@ -196,7 +198,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void ToArray_EmptyList_ShouldReturnEmptyArray() {
+	public void toArray_EmptyList_ShouldReturnEmptyArray() {
 		// Arrange
 		DoublyLinkedList<String> list = new DoublyLinkedList<>();
 
@@ -208,7 +210,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void ToArray_NonEmptyList_ShouldReturnArray() {
+	public void toArray_NonEmptyList_ShouldReturnArray() {
 		// Arrange
 		DoublyLinkedList<String> list = new DoublyLinkedList<>();
 		list.аddLast("Five");
@@ -227,7 +229,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void ForEach_EmptyList_ShouldEnumerateElementsCorrectly() {
+	public void forEach_EmptyList_ShouldEnumerateElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
@@ -240,7 +242,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void ForEach_SingleElement_ShouldEnumerateElementsCorrectly() {
+	public void forEach_SingleElement_ShouldEnumerateElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 		list.аddLast(5);
@@ -254,7 +256,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void ForEach_MultipleElements_ShouldEnumerateElementsCorrectly() {
+	public void forEach_MultipleElements_ShouldEnumerateElementsCorrectly() {
 		// Arrange
 		DoublyLinkedList<String> list = new DoublyLinkedList<>();
 		list.аddLast("Five");
@@ -274,7 +276,7 @@ public class DoublyLinkedListTests {
 	 */
 
 	@Test
-	public void Iterable_Foreach_MultipleElements() {
+	public void iterable_Foreach_MultipleElements() {
 		// Arrange
 		DoublyLinkedList<String> list = new DoublyLinkedList<>();
 		list.аddLast("Five");
@@ -292,7 +294,7 @@ public class DoublyLinkedListTests {
 	}
 
 	@Test
-	public void Iterable_NonGeneric_MultipleElements() {
+	public void iterable_NonGeneric_MultipleElements() {
 		// Arrange
 		DoublyLinkedList<Object> list = new DoublyLinkedList<>();
 		list.аddLast("Five");
