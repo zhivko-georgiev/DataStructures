@@ -86,6 +86,49 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 		return lastElement;
 	}
 
+	public void remove(T data) {
+		if (this.count == 0) {
+			throw new NoSuchElementException();
+		}
+		
+		if (this.count == 1 && this.head.value.equals(data)) {
+			this.head = this.tail = null; // removing only item from list
+			this.count--;
+
+			return;
+		}
+		
+		if (this.head.value.equals(data)) { // removing head
+			this.head = this.head.nextNode;
+			this.head.prevNode = null;
+			this.count--;
+
+			return;
+		}
+		
+		if (this.tail.value.equals(data)) { // removing tail
+			this.tail = this.tail.prevNode;
+			this.tail.nextNode = null;
+			this.count--;
+
+			return;
+		}
+
+		for (ListNode<T> current = this.head; current != null; current = current.nextNode) {
+			if (current.value.equals(data)) {
+				ListNode<T> previous = current.prevNode;
+				ListNode<T> next = current.nextNode;
+				previous.nextNode = next;
+				next.prevNode = previous;
+				this.count--;
+
+				return;
+			}
+		}
+
+		throw new NoSuchElementException();
+	}
+
 	public int size() {
 		return this.count;
 	}

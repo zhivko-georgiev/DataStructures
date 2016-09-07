@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
@@ -191,6 +192,50 @@ public class DoublyLinkedListTests {
 		List<Integer> items = new ArrayList<Integer>();
 		list.forEachNode(items::add);
 		CollectionUtils.isEqualCollection(items, Arrays.asList(8, 9));
+	}
+	
+	/*
+	 * Remove
+	 */
+	
+	@Test(expected = NoSuchElementException.class)
+	public void remove_EmptyList_ShouldThrowException() {
+		// Arrange
+		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+
+		// Act
+		list.remove(1);
+	}
+	
+	@Test(expected = NoSuchElementException.class)
+	public void remove_NonExistingValue_ShouldThrowException() {
+		// Arrange
+		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+		list.аddFirst(2);
+		list.аddFirst(3);
+
+		// Act
+		list.remove(1);
+	}
+	
+	@Test
+	public void remove_SeveralElements_ShouldRemoveElementsCorrectly() {
+		// Arrange
+		DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+		list.аddFirst(10);
+		list.аddFirst(9);
+		list.аddFirst(8);
+
+		// Act
+		list.remove(9);
+		list.remove(10);
+
+		// Assert
+		assertEquals(1, list.size());
+
+		List<Integer> items = new ArrayList<Integer>();
+		list.forEachNode(items::add);
+		CollectionUtils.isEqualCollection(items, Arrays.asList(8));
 	}
 
 	/*
